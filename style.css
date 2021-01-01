@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: #333;
+}
+
+.wrapper {
+  width: 90%;
+  max-width: 333px;
+  text-align: left;
+  margin: 0 auto;
+}
+
+header {
+  margin: 25px 0 15px;
+  border-bottom: 1px dashed #999;
+}
+
+a {
+  color: #333;
+}
+
+footer {
+  margin: 15px 0 25px;
+  border-top: 1px dashed #999;
+  font-size: 75%;
+}
