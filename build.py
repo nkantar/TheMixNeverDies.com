@@ -62,7 +62,7 @@ def generate_index():
         html = "".join(
             [
                 POST_HTML.substitute(date=date, embeds_html=posts[date])
-                for date in list(reversed(posts.keys()))[:INDEX_DATES]
+                for date in list(reversed(list(posts.keys())))[:INDEX_DATES]
             ]
         )
 
