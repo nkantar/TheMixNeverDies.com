@@ -2,8 +2,8 @@
 
 
 from pathlib import Path
+from shutil import copy, rmtree
 from string import Template
-from shutil import copy
 
 
 SPLIT_CHAR = "|"
@@ -44,6 +44,13 @@ def generate_index():
             post = POST_HTML.substitute(date=date, embed_html=embed_html)
 
             html += post
+
+        try:
+            rmtree(OUTPUT_DIR_PATH)
+        except FileNotFoundError:
+            pass
+
+        OUTPUT_DIR_PATH.mkdir()
 
         with open(TEMPLATE_FILE_PATH) as template_file:
             output_template = Template(template_file.read())
