@@ -12,3 +12,6 @@ devserve: ## serve dev version of site
 
 watch: ## watch for rebuilt and regen custom and css
 	modd
+
+netlify: ## build an deploy site on netlify
+	pip install spotipy jinja2 python-dotenv && ./build.py
