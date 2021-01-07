@@ -13,7 +13,6 @@ load_dotenv()  # see .env
 ##################################################
 # configuration
 
-# SPLIT_CHAR = "|"
 HOMEPAGE_DATES = 7
 
 
