@@ -7,7 +7,6 @@ import shutil
 
 import spotipy
 
-
 from constants import (
     ARCHIVE_DIR_PATH,
     ARCHIVE_PATH,
