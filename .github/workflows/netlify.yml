@@ -13,4 +13,4 @@ jobs:
       NETLIFY_HOOK_ID: ${{ secrets.NETLIFY_HOOK_ID }}
     steps:
       - name: POST to Build Hook
-        run: curl -X POST -d {} https://api.netlify.com/build_hooks/$NETLIFY_HOOK_ID
+        run: curl -X POST -d {} "https://api.netlify.com/build_hooks/$NETLIFY_HOOK_ID"
