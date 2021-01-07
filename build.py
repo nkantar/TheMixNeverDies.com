@@ -5,6 +5,7 @@ from collections import defaultdict
 import json
 import shutil
 
+from dateutil import parser, tz
 import spotipy
 
 from constants import (
@@ -61,6 +62,16 @@ def auth():
     return sp
 
 
+def _track_date(dt_str):
+    dt = parser.parse(dt_str)
+    dt_utc = dt.replace(tzinfo=tz.gettz("UTC"))
+    dt_pacific = dt_utc.astimezone(tz.gettz("America/Los_Angeles"))
+
+    dt_pacific_str = dt_pacific.isoformat()[:10]
+
+    return dt_pacific_str
+
+
 def fetch_tracks(sp):
     page = {"next": True}
     tracks = []
@@ -69,7 +80,7 @@ def fetch_tracks(sp):
         page = sp.current_user_saved_tracks(limit=20, offset=offset)
         tracks.extend(
             [
-                {"date": track["added_at"][:10], "id": track["track"]["id"]}
+                {"date": _track_date(track["added_at"]), "id": track["track"]["id"]}
                 for track in page["items"]
             ]
         )
