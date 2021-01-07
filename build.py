@@ -2,6 +2,7 @@
 
 
 from collections import defaultdict
+import json
 import shutil
 
 import spotipy
@@ -32,18 +33,32 @@ from constants import (
 from helpers import populate_template, write_file
 
 
+def generate_cache_file():
+    cache = {
+        "access_token": SPOTIFY_ACCESS_TOKEN,
+        "token_type": "Bearer",
+        "expires_in": 3600,
+        "refresh_token": SPOTIFY_REFRESH_TOKEN,
+        "scope": "user-library-read",
+        "expires_at": 0,
+    }
+    contents = json.dumps(cache)
+    write_file(SPOTIFY_CACHE_PATH, contents=contents)
+
+
 def auth():
-    sp = spotipy.Spotify(
-        auth_manager=spotipy.oauth2.SpotifyOAuth(
-            client_id=SPOTIFY_CLIENT_ID,
-            client_secret=SPOTIFY_CLIENT_SECRET,
-            redirect_uri=SPOTIFY_REDIRECT_URI,
-            scope=SPOTIFY_SCOPE,
-            cache_path=SPOTIFY_CACHE_PATH,
-            username=SPOTIFY_USERNAME,
-            open_browser=False,
-        )
+    oauth = spotipy.oauth2.SpotifyOAuth(
+        client_id=SPOTIFY_CLIENT_ID,
+        client_secret=SPOTIFY_CLIENT_SECRET,
+        redirect_uri=SPOTIFY_REDIRECT_URI,
+        scope=SPOTIFY_SCOPE,
+        cache_path=SPOTIFY_CACHE_PATH,
+        username=SPOTIFY_USERNAME,
+        open_browser=False,
     )
+    oauth.refresh_access_token(SPOTIFY_REFRESH_TOKEN)
+    sp = spotipy.Spotify(auth_manager=oauth)
+
     return sp
 
 
@@ -120,6 +135,9 @@ def copy_static():
 
 
 def spotify():
+    # generate cache file
+    generate_cache_file()
+
     # auth
     sp = auth()
 
