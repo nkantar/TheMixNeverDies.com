@@ -1,0 +1,11 @@
+[tool.poetry]
+name = "TheMixNeverDies.com"
+version = "2021.01.06"
+description = "Nik likes these choonz."
+authors = ["Nik Kantar <nik@nkantar.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+spotipy = "^2.16.1"
+jinja2 = "^2.11.2"
+python-dotenv = "^0.15.0"
