@@ -35,4 +35,5 @@ This project is released into the public domain via the [Unlicense].
 [python-dotenv]: https://github.com/theskumar/python-dotenv "theskumar/python-dotenv: Get and set values in your .env file in local and production servers."
 [dateutil]: https://dateutil.readthedocs.io/en/stable/ "dateutil - powerful extensions to datetime — dateutil 2.8.1 documentation"
 [Netlify]: https://www.netlify.com/ "Netlify: Develop & deploy the best web experiences in record time"
+[GitHub Actions]: https://github.com/actions "GitHub Actions"
 [Unlicense]: https://unlicense.org/ "Unlicense.org » Unlicense Yourself: Set Your Code Free"
