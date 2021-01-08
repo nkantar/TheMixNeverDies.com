@@ -126,7 +126,9 @@ def generate_homepage(posts):
 
 def generate_archive(posts):
     _ensure_dir(ARCHIVE_DIR_PATH)
-    contents = populate_template(ARCHIVE_TEMPLATE_NAME, data={"posts": posts})
+    contents = populate_template(
+        ARCHIVE_TEMPLATE_NAME, data={"page_title": "Archive", "posts": posts}
+    )
     write_file(ARCHIVE_PATH, contents=contents)
 
 
@@ -136,7 +138,10 @@ def generate_pages(posts):
         _ensure_dir(post_dir_path)
 
         post_page_path = post_dir_path / "index.html"
-        contents = populate_template(PAGE_TEMPLATE_NAME, data={"post": post})
+        contents = populate_template(
+            PAGE_TEMPLATE_NAME,
+            data={"page_title": f"Archive: {post['date']}", "post": post},
+        )
         write_file(post_page_path, contents=contents)
 
 
