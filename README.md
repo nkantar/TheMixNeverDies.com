@@ -17,7 +17,7 @@ The whole thing is generated using [Python], [Poetry], [spotipy], [Jinja],
 The deployment runs on every change to the `main` branch, and daily at 3:11AM Pacific
 via [GitHub Actions].
 
-Why 3:11AM? Because the `“11 11 * * *”` `cron` schedule syntax means I don’t have to
+Why 3:11AM? Because the `"11 11 * * *"` `cron` schedule syntax means I don’t have to
 remember that the minute comes before the hour.
 
 
