@@ -10,7 +10,7 @@ body {
 
 .wrapper {
   width: 90%;
-  max-width: 333px;
+  max-width: 300px;
   text-align: left;
   margin: 0 auto;
 }
@@ -28,4 +28,12 @@ footer {
   margin: 15px 0 25px;
   border-top: 1px dashed #999;
   font-size: 75%;
+}
+
+.older_newer {
+  height: 10px;
+}
+
+.newer {
+  float: right;
 }

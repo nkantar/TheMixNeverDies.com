@@ -3,4 +3,8 @@
 {% block content %}
   <h2>{{ page_title }}</h2>
   {% include "embeds.html" %}
+  <div class="older_newer">
+    {% include "older.html" %}
+    {% include "newer.html" %}
+  </div>
 {% endblock %}

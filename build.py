@@ -104,14 +104,45 @@ def clean_output():
         _ensure_dir(OUTPUT_DIR_PATH)
 
 
+def _older_post_date(dates, date):
+    date_idx = dates.index(date)
+
+    # oldest post has no older
+    if date_idx == (len(dates) - 1):
+        return
+
+    older_idx = date_idx + 1
+    older_date = dates[older_idx]
+    return older_date
+
+
+def _newer_post_date(dates, date):
+    date_idx = dates.index(date)
+
+    # newest post has no newer
+    if date_idx == 0:
+        return
+
+    newer_idx = date_idx - 1
+    newer_date = dates[newer_idx]
+    return newer_date
+
+
 def generate_posts(tracks):
     posts_dict = defaultdict(list)
     for track in tracks:
         posts_dict[track["date"]].append(track["id"])
 
+    dates = sorted(posts_dict.keys(), reverse=True)
+
     posts = [
-        {"date": date, "tracks": posts_dict[date]}
-        for date in sorted(posts_dict.keys(), reverse=True)
+        {
+            "date": date,
+            "tracks": posts_dict[date],
+            "newer": _newer_post_date(dates, date),
+            "older": _older_post_date(dates, date),
+        }
+        for date in dates
     ]
 
     return posts

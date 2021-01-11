@@ -4,5 +4,10 @@
   {% for post in posts %}
     <h2>{{ post["date"] }}</h2>
     {% include "embeds.html" %}
+    {% if loop.last %}
+      <div class="older_newer">
+        {% include "older.html" %}
+      </div>
+    {% endif %}
   {% endfor %}
 {% endblock %}
