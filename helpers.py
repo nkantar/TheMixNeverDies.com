@@ -9,7 +9,7 @@ env = Environment(
 )
 
 
-def populate_template(template_name, data):
+def populate_template(template_name, data={}):
     template = env.get_template(template_name)
     populated_template = template.render(**data)
     return populated_template

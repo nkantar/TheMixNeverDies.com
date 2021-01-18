@@ -32,6 +32,7 @@ OUTPUT_STATIC_DIR_PATH = OUTPUT_DIR_PATH / "static"
 
 HOMEPAGE_PATH = OUTPUT_DIR_PATH / "index.html"
 ARCHIVE_PATH = ARCHIVE_DIR_PATH / "index.html"
+ERROR_404_PATH = OUTPUT_DIR_PATH / "404.html"
 
 
 ##################################################
@@ -40,6 +41,7 @@ ARCHIVE_PATH = ARCHIVE_DIR_PATH / "index.html"
 HOMEPAGE_TEMPLATE_NAME = "home.html"
 ARCHIVE_TEMPLATE_NAME = "archive.html"
 PAGE_TEMPLATE_NAME = "page.html"
+ERROR_404_TEMPLATE_NAME = "404.html"
 
 
 ##################################################

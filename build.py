@@ -12,6 +12,8 @@ from constants import (
     ARCHIVE_DIR_PATH,
     ARCHIVE_PATH,
     ARCHIVE_TEMPLATE_NAME,
+    ERROR_404_PATH,
+    ERROR_404_TEMPLATE_NAME,
     HOMEPAGE_DATES,
     HOMEPAGE_PATH,
     HOMEPAGE_TEMPLATE_NAME,
@@ -174,6 +176,11 @@ def generate_pages(posts):
         write_file(post_page_path, contents=contents)
 
 
+def generate_404():
+    contents = populate_template(ERROR_404_TEMPLATE_NAME)
+    write_file(ERROR_404_PATH, contents=contents)
+
+
 def copy_static():
     shutil.copytree(STATIC_DIR_PATH, OUTPUT_STATIC_DIR_PATH)
 
@@ -202,6 +209,9 @@ def spotify():
 
     # generate pages
     generate_pages(posts)
+
+    # generate 404
+    generate_404()
 
     # copy static
     copy_static()
