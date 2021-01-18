@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "TheMixNeverDies.com"
-version = "2021.01.06"
+version = "2021.01.18"
 description = "Nik likes these choonz."
 authors = ["Nik Kantar <nik@nkantar.com>"]
 
