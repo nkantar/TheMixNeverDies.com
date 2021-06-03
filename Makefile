@@ -13,5 +13,5 @@ devserve: ## serve dev version of site
 watch: ## watch for rebuilt and regen custom and css
 	modd
 
-netlify: ## build an deploy site on netlify
-	pip install spotipy jinja2 python-dotenv python-dateutil && ./build.py
+export: ## export dependencies to requirements.txt for Netlify
+	poetry export > requirements.txt
