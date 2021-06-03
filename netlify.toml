@@ -1,6 +1,6 @@
 [build]
   publish = "output/"
-  command = "make build"
+  command = "make netlify"
 [context.production]
   environment = { PYTHON_VERSION = "3.7" }
 

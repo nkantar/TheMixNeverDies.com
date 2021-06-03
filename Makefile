@@ -15,3 +15,6 @@ watch: ## watch for rebuilt and regen custom and css
 
 export: ## export dependencies to requirements.txt for Netlify
 	poetry export > requirements.txt
+
+netlify: ## run build script on Netlify
+	./build.py
