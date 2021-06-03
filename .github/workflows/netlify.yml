@@ -1,5 +1,8 @@
 name: Trigger Netlify Build
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: "11 11 * * *" # daily at 11:11 UTC, aka 3:11 Pacific
 jobs:
