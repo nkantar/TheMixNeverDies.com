@@ -202,7 +202,7 @@ def update_playlist(sp, tracks):
         page_idx = idx // 100
         pages[page_idx].append(track["id"])
 
-    for page in reversed(pages.values()):
+    for page in reversed(list(pages.values())):
         sp.playlist_add_items(SPOTIFY_PLAYLIST_ID, page)
 
 
