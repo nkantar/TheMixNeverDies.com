@@ -20,10 +20,14 @@ from constants import (
     OUTPUT_DIR_PATH,
     OUTPUT_STATIC_DIR_PATH,
     PAGE_TEMPLATE_NAME,
+    PLAYLIST_DIR_PATH,
+    PLAYLIST_PATH,
+    PLAYLIST_TEMPLATE_NAME,
     SPOTIFY_ACCESS_TOKEN,
     SPOTIFY_CACHE_PATH,
     SPOTIFY_CLIENT_ID,
     SPOTIFY_CLIENT_SECRET,
+    SPOTIFY_PLAYLIST_ID,
     SPOTIFY_REDIRECT_URI,
     SPOTIFY_REFRESH_TOKEN,
     SPOTIFY_SCOPE,
@@ -155,6 +159,18 @@ def generate_homepage(posts):
     write_file(HOMEPAGE_PATH, contents=contents)
 
 
+def generate_playlist_page(playlist_id):
+    _ensure_dir(PLAYLIST_DIR_PATH)
+    contents = populate_template(
+        PLAYLIST_TEMPLATE_NAME,
+        data={
+            "page_title": "Playlist",
+            "playlist_id": playlist_id,
+        },
+    )
+    write_file(PLAYLIST_PATH, contents=contents)
+
+
 def generate_archive(posts):
     _ensure_dir(ARCHIVE_DIR_PATH)
     contents = populate_template(
@@ -203,6 +219,9 @@ def spotify():
 
     # generate homepage
     generate_homepage(posts)
+
+    # generate playlist page
+    generate_playlist_page(SPOTIFY_PLAYLIST_ID)
 
     # generate archive
     generate_archive(posts)
