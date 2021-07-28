@@ -20,10 +20,14 @@ from constants import (
     OUTPUT_DIR_PATH,
     OUTPUT_STATIC_DIR_PATH,
     PAGE_TEMPLATE_NAME,
+    PLAYLIST_DIR_PATH,
+    PLAYLIST_PATH,
+    PLAYLIST_TEMPLATE_NAME,
     SPOTIFY_ACCESS_TOKEN,
     SPOTIFY_CACHE_PATH,
     SPOTIFY_CLIENT_ID,
     SPOTIFY_CLIENT_SECRET,
+    SPOTIFY_PLAYLIST_ID,
     SPOTIFY_REDIRECT_URI,
     SPOTIFY_REFRESH_TOKEN,
     SPOTIFY_SCOPE,
@@ -34,6 +38,7 @@ from helpers import populate_template, write_file
 
 
 def generate_cache_file():
+    print("Generating cache file...")
     cache = {
         "access_token": SPOTIFY_ACCESS_TOKEN,
         "token_type": "Bearer",
@@ -47,6 +52,7 @@ def generate_cache_file():
 
 
 def auth():
+    print("Authenticating...")
     oauth = spotipy.oauth2.SpotifyOAuth(
         client_id=SPOTIFY_CLIENT_ID,
         client_secret=SPOTIFY_CLIENT_SECRET,
@@ -73,10 +79,12 @@ def _track_date(dt_str):
 
 
 def fetch_tracks(sp):
+    print("Fetching tracks...")
     page = {"next": True}
     tracks = []
     offset = 0
     while page["next"]:
+        print(f"Fetching tracks: offset {offset}...")
         page = sp.current_user_saved_tracks(limit=20, offset=offset)
         tracks.extend(
             [
@@ -95,6 +103,7 @@ def _ensure_dir(path):
 
 
 def clean_output():
+    print("Cleaning output dir...")
     # create fresh output/ dir
     try:
         shutil.rmtree(OUTPUT_DIR_PATH)
@@ -129,6 +138,7 @@ def _newer_post_date(dates, date):
 
 
 def generate_posts(tracks):
+    print("Generating posts...")
     posts_dict = defaultdict(list)
     for track in tracks:
         posts_dict[track["date"]].append(track["id"])
@@ -149,13 +159,55 @@ def generate_posts(tracks):
 
 
 def generate_homepage(posts):
+    print("Generating homepage...")
     contents = populate_template(
         HOMEPAGE_TEMPLATE_NAME, data={"posts": posts[:HOMEPAGE_DATES]}
     )
     write_file(HOMEPAGE_PATH, contents=contents)
 
 
+def generate_playlist_page(playlist_id):
+    print("Generating playlist page...")
+    _ensure_dir(PLAYLIST_DIR_PATH)
+    contents = populate_template(
+        PLAYLIST_TEMPLATE_NAME,
+        data={
+            "page_title": "Playlist",
+            "playlist_id": playlist_id,
+        },
+    )
+    write_file(PLAYLIST_PATH, contents=contents)
+
+
+def clear_playlist(sp):
+    print("Clearing playlist...")
+    # fetch all playlist tracks
+    page = sp.playlist_tracks(SPOTIFY_PLAYLIST_ID)
+    offset = 0
+    while page["items"]:
+        print(f"Clearing playlist: offset {offset}...")
+        page = sp.playlist_tracks(SPOTIFY_PLAYLIST_ID, offset=offset)
+        sp.playlist_remove_all_occurrences_of_items(
+            SPOTIFY_PLAYLIST_ID,
+            items=[track["track"]["id"] for track in page["items"]],
+        )
+
+        offset += 100
+
+
+def update_playlist(sp, tracks):
+    print("Updating playlist...")
+    pages = defaultdict(list)
+    for idx, track in enumerate(tracks):
+        page_idx = idx // 100
+        pages[page_idx].append(track["id"])
+
+    for page in reversed(pages.values()):
+        sp.playlist_add_items(SPOTIFY_PLAYLIST_ID, page)
+
+
 def generate_archive(posts):
+    print("Generating archive...")
     _ensure_dir(ARCHIVE_DIR_PATH)
     contents = populate_template(
         ARCHIVE_TEMPLATE_NAME, data={"page_title": "Archive", "posts": posts}
@@ -164,7 +216,9 @@ def generate_archive(posts):
 
 
 def generate_pages(posts):
+    print("Generating pages...")
     for post in posts:
+        print(f"Generating page: post {post['date']}...")
         post_dir_path = ARCHIVE_DIR_PATH / post["date"]
         _ensure_dir(post_dir_path)
 
@@ -177,15 +231,19 @@ def generate_pages(posts):
 
 
 def generate_404():
+    print("Generating 404...")
     contents = populate_template(ERROR_404_TEMPLATE_NAME)
     write_file(ERROR_404_PATH, contents=contents)
 
 
 def copy_static():
+    print("Copying static...")
     shutil.copytree(STATIC_DIR_PATH, OUTPUT_STATIC_DIR_PATH)
 
 
 def spotify():
+    print("Starting!")
+
     # generate cache file
     generate_cache_file()
 
@@ -204,6 +262,15 @@ def spotify():
     # generate homepage
     generate_homepage(posts)
 
+    # generate playlist page
+    generate_playlist_page(SPOTIFY_PLAYLIST_ID)
+
+    # clear playlist
+    clear_playlist(sp)
+
+    # update playlist
+    update_playlist(sp, tracks)
+
     # generate archive
     generate_archive(posts)
 
@@ -215,6 +282,8 @@ def spotify():
 
     # copy static
     copy_static()
+
+    print("Finished!")
 
 
 if __name__ == "__main__":

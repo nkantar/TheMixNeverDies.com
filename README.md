@@ -8,7 +8,7 @@ As the tagline says, Nik likes these choonz.
 ## Overview
 
 TMND is a static website generated from the content of my Spotify “Liked Songs”
-playlist.
+playlist. It's also an actual [playlist] as well.
 
 It’s got a homepage with the last 7 days of songs, and a daily archive.
 
@@ -37,6 +37,7 @@ This project is released into the public domain via the [Unlicense].
 
 
 [**The Mix Never Dies**]: https://themixneverdies.com/ "The Mix Never Dies"
+[playlist]: https://open.spotify.com/playlist/7CQ0dTTvY6eled5VpIGoPc?si=4de08c23cc514122 "TheMixNeverDies.com - playlist by nkantar | Spotify"
 [Python]: https://www.python.org/ "Welcome to Python.org"
 [Poetry]: https://python-poetry.org/ "Poetry - Python dependency management and packaging made easy."
 [spotipy]: https://github.com/plamere/spotipy "plamere/spotipy: A light weight Python library for the Spotify Web API"
