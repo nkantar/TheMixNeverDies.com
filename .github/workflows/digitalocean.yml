@@ -1,0 +1,14 @@
+name: Trigger DigitalOcean Build
+on:
+  schedule:
+    - cron: "11 11 * * *" # daily at 11:11 UTC, aka 3:11 Pacific
+jobs:
+  build:
+    name: Request DigitalOcean Webhook
+    runs-on: ubuntu-latest
+    env:
+      DO_TOKEN: ${{ secrets.DO_TOKEN }}
+      DO_APP_ID: ${{ secrets.DO_APP_ID }}
+    steps:
+      - name: POST to Build Hook
+        run: make trigger

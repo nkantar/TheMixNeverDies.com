@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: help build devserve watch
+.PHONY: help build devserve watch deploy trigger
 
 help: ## this help dialog
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -13,8 +13,8 @@ devserve: ## serve dev version of site
 watch: ## watch for rebuilt and regen custom and css
 	modd
 
-export: ## export dependencies to requirements.txt for Netlify
-	poetry export > requirements.txt
+deploy: ## deploy on DigitalOcean
+	poetry install && poetry run python build.py
 
-netlify: ## run build script on Netlify
-	./build.py
+trigger: ## trigger deploy on DigitalOcean
+	curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $DO_TOKEN" "https://api.digitalocean.com/v2/apps/$DO_APP_ID/deployments"
