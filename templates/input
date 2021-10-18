@@ -1,2 +1,0 @@
-{% for track in tracks %}{{ track["date"] }}|{{ track["id"] }}
-{% endfor %}
