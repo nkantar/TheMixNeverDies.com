@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "tmnd"
+version = "2021.0.0.0"
+description = "Web app for managing a shareable playlist of liked songs and publishing a blog-style website of them."
+authors = ["Nik Kantar <nik@nkantar.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
