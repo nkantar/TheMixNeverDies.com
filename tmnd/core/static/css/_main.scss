@@ -1,0 +1,61 @@
+body {
+  background: $black;
+  color: $white;
+  font-family: $nunito-sans;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+
+background-color: #1a1a1a;
+background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e6e6e6' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+a {
+  color: $white;
+
+  &:hover, &:active {
+    background: $white;
+    color: $black;
+  }
+}
+
+strong {
+  font-weight: 900;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 900;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+h2 {
+  font-size: 3.5rem;
+}
+
+::selection, ::-moz-selection {
+  background: $pink;
+  color: $black;
+}
+
+.wrapper {
+  display: inline-block;
+  background: $black;
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 25px;
+  // text-align: left;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}

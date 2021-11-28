@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% for date_ in dates %}
+  <h2><a href="{% url "user-date" date_.date_.isoformat %}">{{ date_.date_.isoformat }}</a></h2>
+
+  {% for track in date_.tracks %}
+    {% include "embed.html" with track_embed_url=track.track_embed_url %}
+  {% endfor %}
+{% endfor %}
+
+{% endblock %}
