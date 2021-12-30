@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.spotify",
+    # django-rq
     "django_rq",
     # project
     "tmnd.core",
