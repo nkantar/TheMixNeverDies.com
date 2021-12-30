@@ -1,8 +1,6 @@
 from collections import defaultdict
 from datetime import date, timedelta
 
-from loguru import logger
-
 from django.conf import settings
 from django.db.models import Count
 from django.db.models.functions import TruncDate

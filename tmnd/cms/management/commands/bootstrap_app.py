@@ -1,7 +1,7 @@
 from os import getenv
 
 from dotenv import load_dotenv
-from loguru import logger
+from tmnd.core.logger import log
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -22,10 +22,10 @@ class Command(BaseCommand):
     help = "Bootstrap initial app data"
 
     def handle(self, *args, **kwargs):
-        logger.info("Bootstrapping initial app data")
+        log.info("Bootstrapping initial app data")
 
         # create superuser
-        logger.info(f"Creating superuser {SUPERUSER_USERNAME}")
+        log.info(f"Creating superuser {SUPERUSER_USERNAME}")
         User = get_user_model()
         User.objects.create_superuser(
             SUPERUSER_USERNAME,
@@ -34,14 +34,14 @@ class Command(BaseCommand):
         )
 
         # update site data
-        logger.info("Updating site data")
+        log.info("Updating site data")
         site = Site.objects.first()
         site.domain = "tmnd.local"
         site.name = "the mix never dies"
         site.save()
 
         # add Spotify social app
-        logger.info("Creating social app")
+        log.info("Creating social app")
         app = SocialApp(
             provider="spotify",
             name="Spotify",

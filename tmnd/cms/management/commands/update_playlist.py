@@ -1,4 +1,4 @@
-from loguru import logger
+from tmnd.core.logger import log
 
 from django.core.management.base import BaseCommand
 
@@ -12,7 +12,7 @@ class Command(BaseCommand):
         parser.add_argument("username", nargs=None, type=str)
 
     def handle(self, *args, username, **kwargs):
-        logger.info(f"Updating playlist for user: {username}")
+        log.info(f"Updating playlist for user: {username}")
 
         user = Member.objects.get(member_spotify_id=username)
 

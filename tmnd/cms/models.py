@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from dateutil.parser import parse
-from loguru import logger
 
 from django.contrib.auth.models import User
 from django.db.models import (

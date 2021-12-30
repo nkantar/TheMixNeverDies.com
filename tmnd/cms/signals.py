@@ -1,11 +1,11 @@
 import django_rq
-from loguru import logger
+from tmnd.core.logger import log
 
 from tmnd.cms.models import Member
 
 
 def create_member(user, sociallogin, **kwargs):
-    logger.info(f"Creating member for user: {sociallogin}")
+    log.info(f"Creating member for user: {sociallogin}")
 
     member = Member(
         user=user,
@@ -14,7 +14,7 @@ def create_member(user, sociallogin, **kwargs):
     )
     member.save()
 
-    logger.info(f"Member created: {member.member_spotify_id}")
+    log.info(f"Member created: {member.member_spotify_id}")
 
     member.create_playlist()
 

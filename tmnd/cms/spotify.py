@@ -3,7 +3,7 @@ from pathlib import Path
 import tempfile
 
 from keysort import keysort
-from loguru import logger
+from tmnd.core.logger import log
 import spotipy
 
 from django.conf import settings
@@ -13,7 +13,7 @@ MAX_ADD_REMOVE_TRACKS = 100
 
 
 def auth(username, refresh_token):
-    logger.info(f"Authenticating as {username}")
+    log.info(f"Authenticating as {username}")
 
     cache_path = Path(tempfile.gettempdir()) / f".cache-{username}"
     oauth = spotipy.oauth2.SpotifyOAuth(
@@ -32,7 +32,7 @@ def auth(username, refresh_token):
 
 
 def fetch_saved_tracks(username, sp, offset=0):
-    logger.info(f"Fetching saved tracks for {username} with offset {offset}")
+    log.info(f"Fetching saved tracks for {username} with offset {offset}")
 
     page = sp.current_user_saved_tracks(offset=offset)
     tracks = page["items"]
@@ -47,7 +47,7 @@ def fetch_saved_tracks(username, sp, offset=0):
 
 
 def create_playlist(username, sp):
-    logger.info(f"Creating playlist for {username}")
+    log.info(f"Creating playlist for {username}")
 
     playlist_name = f"{username}'s Liked Songs"
     playlist = sp.user_playlist_create(
@@ -62,7 +62,7 @@ def create_playlist(username, sp):
 
 
 def fetch_playlist_tracks(username, sp, playlist_id, offset=0):
-    logger.info(f"Fetching playlist tracks for {username} with offset {offset}")
+    log.info(f"Fetching playlist tracks for {username} with offset {offset}")
 
     page = sp.user_playlist_tracks(
         user=username,
@@ -79,7 +79,7 @@ def fetch_playlist_tracks(username, sp, playlist_id, offset=0):
 
 
 def clear_playlist(username, sp, playlist_id):
-    logger.info(f"Clearing playlist for {username}")
+    log.info(f"Clearing playlist for {username}")
 
     tracks = fetch_playlist_tracks(username, sp, playlist_id)
     track_ids = [track["track"]["id"] for track in tracks]
@@ -98,7 +98,7 @@ def clear_playlist(username, sp, playlist_id):
 
 
 def populate_playlist(username, sp, playlist_id, track_ids):
-    logger.info(f"Populating playlist for {username}")
+    log.info(f"Populating playlist for {username}")
 
     pages = defaultdict(list)
     for idx, track_id in enumerate(reversed(track_ids)):
@@ -114,7 +114,7 @@ def populate_playlist(username, sp, playlist_id, track_ids):
 
 
 def update_playlist(username, sp, playlist_id, liked_track_ids):
-    logger.info(f"Updating playlist for {username}")
+    log.info(f"Updating playlist for {username}")
 
     clear_playlist(username, sp, playlist_id)
     populate_playlist(username, sp, playlist_id, liked_track_ids)
