@@ -1,6 +1,8 @@
+# we only commit source files
+*.css
 
-# Created by https://www.toptal.com/developers/gitignore/api/python,django,git,macos,vim
-# Edit at https://www.toptal.com/developers/gitignore?templates=python,django,git,macos,vim
+# Created by https://www.toptal.com/developers/gitignore/api/vim,git,macos,python,django,sass
+# Edit at https://www.toptal.com/developers/gitignore?templates=vim,git,macos,python,django,sass
 
 ### Django ###
 *.log
@@ -258,6 +260,12 @@ Temporary Items
 
 # Cython debug symbols
 
+### Sass ###
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+
 ### Vim ###
 # Swap
 [._]*.s[a-v][a-z]
@@ -279,5 +287,4 @@ tags
 # Persistent undo
 [._]*.un~
 
-# End of https://www.toptal.com/developers/gitignore/api/python,django,git,macos,vim
-
+# End of https://www.toptal.com/developers/gitignore/api/vim,git,macos,python,django,sass
