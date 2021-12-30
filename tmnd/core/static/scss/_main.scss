@@ -1,0 +1,58 @@
+body {
+  background: $black;
+  color: $white;
+  font-family: $nunito;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+}
+
+a {
+  color: $white;
+
+  &:hover, &:active {
+    background: $pink;
+    color: $black;
+  }
+}
+
+strong {
+  font-weight: 900;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 900;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+h2 {
+  font-size: 3.5rem;
+}
+
+::selection, ::-moz-selection {
+  background: $pink;
+  color: $black;
+}
+
+.wrapper {
+  display: inline-block;
+  background: $black;
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 25px;
+  // text-align: left;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}

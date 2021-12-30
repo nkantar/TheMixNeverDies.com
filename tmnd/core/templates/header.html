@@ -1,0 +1,11 @@
+<header>
+  <h1><a href="/">The Mix Never Dies</a></h1>
+
+  <p>
+    {% if not user.is_authenticated %}
+      <a href="/login/">Log in with Spotify</a>
+    {% else %}
+      Hello, {{ user.username }} | <a href="/logout/">Log out</a>
+    {% endif %}
+  </p>
+</header>

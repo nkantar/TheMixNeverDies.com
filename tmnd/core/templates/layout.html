@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- voodoo -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- basic meta -->
+    <title>The Mix Never Dies | TODO</title>
+    <meta name="description" content="TODO" />
+
+    <!-- OG -->
+    <meta property="og:title" content="The Mix Never Dies | TODO" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="TODO" />
+    <meta property="og:description" content="TODO" />
+    <meta property="og:image" content="TODO" />
+    <meta property="og:image:width" content="TODO" />
+    <meta property="og:image:height" content="TODO" />
+    <meta name="twitter:card" content="summary" />
+
+    <!-- assets -->
+    <link rel="shortcut icon" href="/static/img/tmnd-logo-64.gif" />
+    <link rel="apple-touch-icon" href="/static/img/tmnd-logo-144.gif" />
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+
+    <!-- Plausible -->
+    <script async defer data-domain="themixneverdies.com" src="https://stats.themixneverdies.com/js/index.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      {% include "header.html" %}
+      {% block content %}{% endblock %}
+      {% include "footer.html" %}
+    </div>
+  </body>
+</html>

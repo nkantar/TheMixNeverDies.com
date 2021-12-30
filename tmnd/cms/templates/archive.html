@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2><a href="{% url "user-archive" %}">Archive</a></h2>
+
+<ul>
+  {% for date_ in dates %}
+    <li><a href="{% url "user-date" date_.added_date.isoformat %}">{{ date_.added_date.isoformat }}: {{ date_.track_count }}</a></li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
