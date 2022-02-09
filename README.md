@@ -1,3 +1,7 @@
+**NOTICE: This project has been shelved. You can read about it [here](https://www.nkantar.com/blog/2022/02/the-mix-has-died/ "The Mix Has Died | Blog | Nik Kantar").**
+
+---
+
 # TheMixNeverDies.com
 
 [**The Mix Never Dies**] (**TMND**) is a collection of songs in Nik’s Spotify “Liked
